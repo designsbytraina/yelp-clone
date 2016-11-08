@@ -33,6 +33,9 @@ export class Container extends React.Component {
         // There was an error
       })
   }
+  onMarkerClick(item) {
+
+  }
   render() {
     let children = null;
     if (this.props.children) {
@@ -42,7 +45,8 @@ export class Container extends React.Component {
         {
           google: this.props.google,
           places: this.state.places,
-          loaded: this.props.loaded
+          loaded: this.props.loaded,
+          onMarkerClick: this.onMarkerClick.bind(this)
         });
     }    
     return (
