@@ -2,15 +2,12 @@ const NODE_ENV = process.env.NODE_ENV;
 const dotenv = require('dotenv');
 
 const webpack = require('webpack');
-const fs      = require('fs');
+const fs      = require('fs-extra');
 const path    = require('path'),
       join    = path.join,
       resolve = path.resolve;
 
 const getConfig = require('hjs-webpack');
-
-const isDev  = NODE_ENV === 'development';
-const isTest = NODE_ENV === 'test';
 
 const root    = resolve(__dirname);
 const src     = join(root, 'src');
@@ -34,11 +31,11 @@ var config = getConfig({
   html: function (context) {
     return {
       'index.html': context.defaultTemplate({
-        title: 'yelp-clone from fullstackreact.com',
+        title: 'yelp-clone',
         publicPath: isDev ? 'http://localhost:3000/' : '',
         meta: {
-          'name': 'fullstackreact yelp clone',
-          'description': 'A minimal yelp clone from the team behind the fullstackreact.com book'
+          'name': 'react yelp clone',
+          'description': ''
         }
       })
     }

@@ -64,8 +64,4 @@ MapComponent.defaultProps = {
   onMarkerClick: identity
 }
 
-// Container.contextTypes = {
-//   router: React.PropTypes.object
-// }
-
 export default MapComponent;

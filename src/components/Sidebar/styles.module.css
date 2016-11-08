@@ -1,5 +1,6 @@
 @import url("../../styles/base.css");
 @import url("../../styles/queries.css");
+@import url("../../styles/colors.css");
 
 .sidebar {
   height: 100%;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes as T } from 'react';
 import Map, {GoogleApiWrapper} from 'google-maps-react';
 
 import {searchNearby} from 'utils/googleApiHelpers';

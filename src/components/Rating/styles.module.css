@@ -1,4 +1,6 @@
-@import "../../styles/colors.css";
+@import url("../../styles/base.css");
+@import url("../../styles/queries.css");
+@import url("../../styles/colors.css");
 
 .sprite {
   unicode-bidi: bidi-override;
