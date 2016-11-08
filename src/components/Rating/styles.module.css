@@ -13,7 +13,7 @@
 }
 
 .top {
-  color: #48b5e9;
+  color: var(--highlight);
   padding: 0;
   position: absolute;
   z-index: 1;
@@ -27,5 +27,5 @@
   padding: 0;
   display: block;
   z-index: 0;
-  color: #a2a2a2;
+  color: var(--light-gray);
 }

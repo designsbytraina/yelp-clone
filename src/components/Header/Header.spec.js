@@ -3,6 +3,7 @@ import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import Header from './Header';
+import styles from './styles.module.css';
 
 describe('<Header />', () => {
   let wrapper;
@@ -17,6 +18,6 @@ describe('<Header />', () => {
 
   it('contains a section menu with the title', () => {
     expect(wrapper.find('section').first().text())
-        .to.equal('Fullstack.io')
+        .to.equal('RTG')
   });
 })

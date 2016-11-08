@@ -1,8 +1,14 @@
 import React, { PropTypes as T } from 'react';
-import {getDetails} from 'utils/googleApiHelpers';
+import classnames from 'classnames';
+import { getDetails } from 'utils/googleApiHelpers';
+
 import styles from './styles.module.css';
 
 export class Detail extends React.Component {
+  static childContextTypes = {
+    router: T.object,
+  }
+
   constructor(props, context) {
     super(props, context)
 
@@ -52,7 +58,9 @@ export class Detail extends React.Component {
 
   renderPhotos(place) {
     if (!place.photos || place.photos.length == 0) return;
+
     const cfg = {maxWidth: 100, maxHeight: 100}
+    
     return (<div className={styles.photoStrip}>
       {place.photos.map(p => {
         const url = `${p.getUrl(cfg)}.png`
@@ -69,6 +77,7 @@ export class Detail extends React.Component {
     }
     // We're no longer loading when we get here
     const {place} = this.state;
+
     return (
       <div className={styles.wrapper}>
         <div className={styles.header}>

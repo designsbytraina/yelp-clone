@@ -1,4 +1,6 @@
 @import url("../../../styles/base.css");
+@import url("../../../styles/colors.css");
+@import url("../../../styles/queries.css");
 
 .header {
   padding: 0 var(--padding);
@@ -7,9 +9,27 @@
   }
 }
 
+.flex {
+  display: flex;
+  margin: 0;
+
+  width: 100%;
+  -webkit-box-orient: horizontal;
+  -o-box-orient: horizontal;
+
+  flex-direction: column;
+
+  /*@media (--screen-phone-lg) {
+    flex-direction: row;
+  }*/
+}
+
 .details {
   /* a little bit of padding */
   padding: 0 var(--padding);
+  
+  composes: flex;
+  flex-direction: column;
 
   ::-webkit-scrollbar {
     width: 0px;

@@ -1,8 +1,10 @@
+@import url("../../styles/base.css");
+@import url("../../styles/queries.css");
+
 .wrapper {
   overflow-y: scroll;
   display: flex;
   margin: 0;
-  padding: 15px;
 
   height: 100vh;
   -webkit-box-orient: horizontal;
@@ -14,7 +16,7 @@
 
   @media (--screen-phone-lg) {
     /* applied when the screen is larger */
-    flex-direction: column;
+    flex-direction: row;
   }
 }
 
