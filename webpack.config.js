@@ -42,7 +42,11 @@ const dotenv = require('dotenv');
 
 const dotEnvVars = dotenv.config();
 
-const isDev = NODE_ENV === 'development';
+require('babel-register');
+
+const NODE_ENV = process.env.NODE_ENV;
+const isDev  = NODE_ENV === 'development';
+const isTest = NODE_ENV === 'test';
 
 // alternatively, we can use process.argv[1]
 // const isDev = (process.argv[1] || '')
@@ -82,12 +86,36 @@ var config = getConfig({
   clearBeforeBuild: true
 })
 
+config.externals = {
+  'react/lib/ReactContext': true,
+  'react/lib/ExecutionEnvironment': true,
+  'react/addons': true
+}
+
 config.resolve.root = [src, modules]
 config.resolve.alias = {
   'css': join(src, 'styles'),
   'containers': join(src, 'containers'),
   'components': join(src, 'components'),
   'utils': join(src, 'utils')
+}
+
+if (isTest) {
+  config.externals = {
+    'react/lib/ReactContext': true,
+    'react/lib/ExecutionEnvironment': true
+  }
+
+  config.plugins = config.plugins.filter(p => {
+    const name = p.constructor.toString();
+    const fnName = name.match(/^function (.*)\((.*\))/)
+
+    const idx = [
+      'DedupePlugin',
+      'UglifyJsPlugin'
+    ].indexOf(fnName[1]);
+    return idx < 0;
+  })
 }
 
 config.plugins = [
