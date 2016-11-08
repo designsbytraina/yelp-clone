@@ -4,9 +4,27 @@ import Map, { GoogleApiWrapper, Marker } from 'google-maps-react';
 
 import styles from './styles.module.css';
 
+
 export class MapComponent extends React.Component {
-  renderChildren() {
+  _renderMarkers() {
+    if (!this.props.places) {
+      return;
+    }
+    return this.props.places.map(p => {
+      return <Marker
+                key={p.id}
+                name={p.id}
+                place={p}
+                label={p.name}
+                onClick={this.props.onMarkerClick.bind(this)}
+                map={this.props.map}
+                position={p.geometry.location} />
+    });
+  }
+
+  _renderChildren() {
     const {children} = this.props;
+
     if (React.Children.count(children) > 0) {
       return React.Children.map(children, c => {
         return React.cloneElement(c, this.props, {
@@ -15,31 +33,13 @@ export class MapComponent extends React.Component {
         })
       })
     } else {
-      return this.renderMarkers();
+      return this._renderMarkers();
     }
   }
 
-  renderMarkers() {
-    if (!this.props.places) { return null; }
-    return this.props.places.map(place =>{
-      return <Marker key={place.id}
-                name={place.id}
-                place={place}
-                label={place.name}
-                onClick={this.props.onMarkerClick.bind(this)}
-                map={this.props.map}
-                position={place.geometry.location}
-              />
-    })
-  }
-
-  onMarkerClick(item) {
-    const {place} = item; // place prop
-    const {push} = this.context.router;
-    push(`/map/detail/${place.place_id}`)
-  }
-
   render() {
+    const {children} = this.props;
+
     return (
       <Map map={this.props.map}
         google={this.props.google}
@@ -50,7 +50,7 @@ export class MapComponent extends React.Component {
         onClick={this.props.onClick}
         visible={!children || React.Children.count(children) == 0}
         >
-        {this.renderChildren()}
+        {this._renderChildren()}
       </Map>
     )
   }
